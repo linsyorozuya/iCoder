@@ -424,6 +424,16 @@ article .date {
     margin-bottom: 7px;
 }
 
+
+.tag-list li, .variant-0 {background-color: #66293c;}
+.tag-list li, .variant-1 {background-color: #913e37;}
+.tag-list li, .variant-2 {background-color: #ca7618;}
+.tag-list li, .variant-3 {background-color: #a38138;}
+.tag-list li, .variant-4 {background-color: #2f7176;}
+.tag-list li, .variant-5 {background-color: #246089;}
+.tag-list li, .variant-6 {background-color: #498840;}
+.tag-list li, .variant-7 {background-color: #484781;}
+
 .tag-list li,
 .tag {
     display: inline-block;
@@ -458,6 +468,7 @@ article .date {
     margin-right: 10px;
     padding: 6px 10px;
 }
+
 
 @media(max-width: 600px) {
     .wrapper {
