@@ -513,6 +513,22 @@ article .date {
     .wrapper {
         padding: 40px 20px;
     }
+    
+    header nav {
+        padding-top: 2px;
+    }
+
+    header nav li a {
+        padding: 0;
+        margin: 0 10px;
+        border-bottom: 2px solid transparent;
+    }
+
+    header nav li a:hover, header nav li.selected a {
+        background-color: inherit;
+        border-bottom: 2px solid #cb3018;
+        color: #cb3018;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
