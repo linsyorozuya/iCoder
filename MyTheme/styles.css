@@ -340,6 +340,7 @@ header nav a:hover, header nav li.selected a {
     display: block;
     max-width: 100%;
     margin: 20px auto 0 auto;
+    border-radius: 10px;
 }
 
 .content img.compact {
