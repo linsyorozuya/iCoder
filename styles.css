@@ -447,47 +447,47 @@ article .date {
     font-size:0.85em;
 }
 
-/*.tag-list li, .variant-0 {background-color: #66293c;}*/
-/*.tag-list li, .variant-1 {background-color: #913e37;}*/
-/*.tag-list li, .variant-2 {background-color: #ca7618;}*/
-/*.tag-list li, .variant-3 {background-color: #a38138;}*/
-/*.tag-list li, .variant-4 {background-color: #2f7176;}*/
-/*.tag-list li, .variant-5 {background-color: #246089;}*/
-/*.tag-list li, .variant-6 {background-color: #498840;}*/
-/*.tag-list li, .variant-7 {background-color: #484781;}*/
+.variant-0 {background-color: #ca4a44 !important;}
+.variant-1 {background-color: #497d97 !important;}
+.variant-2 {background-color: #3b7e87 !important;}
+.variant-3 {background-color: #388466 !important;}
+.variant-4 {background-color: #54549c !important;}
+.variant-5 {background-color: #b8402e !important;}
+.variant-6 {background-color: #498840 !important;}
+.variant-7 {background-color: #484781 !important;}
 
-/* Tags Color */
-.tag.variant-0 {
-    background-color: #66293c !important;
-}
-
-.tag.variant-1 {
-    background-color: #913e37 !important;
-}
-
-.tag.variant-2 {
-    background-color: #ca7618 !important;
-}
-
-.variant-3 {
-    background-color: #a38138 !important;
-}
-
-.variant-4 {
-    background-color: #2f7176 !important;
-}
-
-.variant-5 {
-    background-color: #246089 !important;
-}
-
-.variant-6 {
-    background-color: #498840 !important;
-}
-
-.variant-7 {
-    background-color: #484781 !important;
-}
+/*/* Tags Color */*/
+/*.tag.variant-0 {*/
+/*    background-color: #66293c !important;*/
+/*}*/
+/**/
+/*.tag.variant-1 {*/
+/*    background-color: #913e37 !important;*/
+/*}*/
+/**/
+/*.tag.variant-2 {*/
+/*    background-color: #ca7618 !important;*/
+/*}*/
+/**/
+/*.variant-3 {*/
+/*    background-color: #a38138 !important;*/
+/*}*/
+/**/
+/*.variant-4 {*/
+/*    background-color: #2f7176 !important;*/
+/*}*/
+/**/
+/*.variant-5 {*/
+/*    background-color: #246089 !important;*/
+/*}*/
+/**/
+/*.variant-6 {*/
+/*    background-color: #498840 !important;*/
+/*}*/
+/**/
+/*.variant-7 {*/
+/*    background-color: #484781 !important;*/
+/*}*/
 
 
 .tag-list a,
