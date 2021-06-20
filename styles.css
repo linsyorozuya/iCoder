@@ -530,6 +530,7 @@ article .date {
     padding: 9px 24px;
     font-weight:bold;
     font-size:18px;
+    flex-grow:1;
 }
 
 .index-item-more  {
@@ -631,5 +632,14 @@ article .date {
     
     article p.info, blockquote p, .services .content > ul, .sponsorship .content > ul, .sponsorship .packages .grid > li, .sponsorship a.email {
         background-color: #101010;
+    }
+    
+    .item-bottom-nav .item{
+        background-color: #171717;
+    }
+    
+    :root {
+        --bg: #222;
+        --pattern-color: #171717;
     }
 }
