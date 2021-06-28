@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Coder 灰桑"/><link rel="canonical" href="https://coder.linsyorozuya.com/posts/SwiftUI%20%E5%A6%82%E4%BD%95%E7%9B%91%E5%90%AC%20@State%20%E5%8F%98%E6%9B%B4"/><meta name="twitter:url" content="https://coder.linsyorozuya.com/posts/SwiftUI%20%E5%A6%82%E4%BD%95%E7%9B%91%E5%90%AC%20@State%20%E5%8F%98%E6%9B%B4"/><meta name="og:url" content="https://coder.linsyorozuya.com/posts/SwiftUI%20%E5%A6%82%E4%BD%95%E7%9B%91%E5%90%AC%20@State%20%E5%8F%98%E6%9B%B4"/><title>SwiftUI 如何监听 @State 变更 | Coder 灰桑</title><meta name="twitter:title" content="SwiftUI 如何监听 @State 变更 | Coder 灰桑"/><meta name="og:title" content="SwiftUI 如何监听 @State 变更 | Coder 灰桑"/><meta name="description" content="Stay Foolish, Always Foolish"/><meta name="twitter:description" content="Stay Foolish, Always Foolish"/><meta name="og:description" content="Stay Foolish, Always Foolish"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Coder 灰桑"/></head><body class="item-page"><header><div class="wrapper"><a href="/" class="site-name">Coder 灰桑</a><p class="description">Stay Foolish, Always Foolish</p><nav><ul><li><a href="/">最新</a></li><li class="selected"><a href="/posts">Code</a></li><li><a href="/products">产品</a></li><li><a href="/about">关于</a></li></ul></nav></div></header><div class="wrapper"><article><h1>SwiftUI 如何监听 @State 变更</h1><div class="metadata"><ul class="tag-list"><li class="tag variant-0"><a href="/tags/swiftui">SwiftUI</a></li><li class="tag variant-0"><a href="/tags/ios">iOS</a></li></ul><span class="date">5月 8, 2021</span></div><div class="content"><h3>几种实现方式</h3><pre><code><span class="keyword">import</span> Combine
+
+<span class="keyword">struct</span> ObserveStateChange: <span class="type">View</span> {
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">VStack</span>(spacing: <span class="number">32</span>) {
+            <span class="type">Solution1</span>().<span class="call">padding</span>().<span class="call">background</span>(<span class="type">Color</span>.<span class="property">red</span>)
+            <span class="type">Solution2</span>().<span class="call">padding</span>().<span class="call">background</span>(<span class="type">Color</span>.<span class="property">yellow</span>)
+            <span class="type">Solution3</span>().<span class="call">padding</span>().<span class="call">background</span>(<span class="type">Color</span>.<span class="property">green</span>)
+        }
+    }
+
+    <span class="comment">/// 1</span>
+    <span class="keyword">struct</span> Solution1: <span class="type">View</span> {
+        <span class="keyword">@State var</span> location: <span class="type">String</span> = <span class="string">""</span>
+
+        <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+            <span class="keyword">let</span> binding = <span class="type">Binding</span>&lt;<span class="type">String</span>&gt;(get: {
+                <span class="keyword">self</span>.<span class="property">location</span>
+            }, set: {
+                <span class="keyword">self</span>.<span class="property">location</span> = $0
+                <span class="comment">// do whatever you want here</span>
+                <span class="call">print</span>(<span class="string">"Solution1</span> \($0)<span class="string">"</span>)
+            })
+
+            <span class="type">TextField</span>(<span class="string">"Search Location"</span>, text: binding)
+        }
+    }
+
+    <span class="comment">/// 2</span>
+    <span class="keyword">struct</span> Solution2: <span class="type">View</span> {
+        <span class="keyword">@State var</span> location: <span class="type">String</span> = <span class="string">""</span>
+
+        <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+            <span class="type">TextField</span>(<span class="string">"Search Location"</span>, text: $location)
+                .<span class="call">onReceive</span>(<span class="type">Just</span>(location)) { <span class="call">print</span>(<span class="string">"Solution2</span> \($0)<span class="string">"</span>) }
+        }
+    }
+
+    <span class="comment">/// 3</span>
+    <span class="keyword">struct</span> Solution3: <span class="type">View</span> {
+        <span class="keyword">@State var</span> location: <span class="type">String</span> = <span class="string">""</span>
+
+        <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+            <span class="type">TextField</span>(<span class="string">"Search Location"</span>, text: $location.<span class="call">onChange</span> { <span class="call">print</span>(<span class="string">"Solution3</span> \($0)<span class="string">"</span>) })
+        }
+    }
+    
+		<span class="comment">/// 4</span>
+    <span class="keyword">struct</span> Solution4: <span class="type">View</span> {
+        <span class="keyword">@State var</span> location: <span class="type">String</span> = <span class="string">""</span>
+
+        <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+            <span class="type">TextField</span>(<span class="string">"Search Location"</span>, text: $location)
+             .<span class="call">onChange</span>(of: location) { 
+                 <span class="call">print</span>(<span class="string">"Solution4</span> \($0)<span class="string">"</span>)   
+            }
+        }
+    }
+}
+
+<span class="keyword">extension</span> <span class="type">Binding</span> {
+    <span class="keyword">func</span> onChange(<span class="keyword">_</span> handler: <span class="keyword">@escaping</span> (<span class="type">Value</span>) -&gt; <span class="type">Void</span>) -&gt; <span class="type">Binding</span>&lt;<span class="type">Value</span>&gt; {
+        <span class="type">Binding</span>(
+            get: { <span class="keyword">self</span>.<span class="property">wrappedValue</span> },
+            set: { newValue <span class="keyword">in
+                self</span>.<span class="property">wrappedValue</span> = newValue
+                <span class="call">handler</span>(newValue)
+            }
+        )
+    }
+}
+
+</code></pre><p>1⃣️使用定义一个 Binding 属性，通过 get 和 set 来变更 @State。</p><p>2⃣️通过 onReceive 监听 Just Publisher 包装 State 促发的事件</p><p>3⃣️通过拓展 Binding 添加一个方法实现方法一的类似实现，包裹一层 Binding 来将变更回调出去。</p><p>4⃣️iOS14 支持的新特性。</p><p><strong>经过实践推荐使用3⃣️或者4⃣️。</strong></p></div></article></div><div class="item-bottom-nav"><div><a href="/posts/Xcode 项目多环境配置" class="item">🔙  Xcode 项目多环境配置</a></div><div><a href="/posts/SwiftUI 开发图片模糊的 MAC 小应用" class="item">SwiftUI - 开发图片模糊的 MAC 小应用  🔜</a></div></div><footer><p>Copyright © 2021 灰桑</p><p>Powered by <a href="https://github.com/johnsundell/publish">John Sundell's Publish</a></p><p><a href="/feed.rss">RSS feed</a></p></footer></body></html>
